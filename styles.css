@@ -36,7 +36,6 @@ body::before {
 /* HEADER */
 header {
   padding: 3rem var(--content-padding) 2rem;
-  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -54,6 +53,7 @@ header::after {
   right: var(--content-padding);
   height: 1px;
   background: linear-gradient(90deg, var(--gold), transparent);
+  opacity: 0.5;
 }
 
 .header-left .label {
@@ -128,12 +128,20 @@ nav a {
   color: var(--muted);
   text-decoration: none;
   padding: 1.25rem 1.5rem;
-  border-right: 1px solid var(--border);
   transition: color 0.3s, background 0.3s;
   white-space: nowrap;
+  position: relative;
 }
 
-nav a:first-child { border-left: 1px solid var(--border); }
+nav a:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 30%;
+  bottom: 30%;
+  width: 1px;
+  background: var(--border);
+}
 
 nav a:hover {
   color: var(--dark);
