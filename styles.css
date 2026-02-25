@@ -7,6 +7,8 @@
   --gold-light: #D4AA4A;
   --muted: #8A7E6A;
   --border: rgba(184, 146, 42, 0.2);
+  --content-max: 1200px;
+  --content-padding: 4rem;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,21 +35,23 @@ body::before {
 
 /* HEADER */
 header {
-  padding: 3rem 4rem 2rem;
+  padding: 3rem var(--content-padding) 2rem;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 2rem;
   position: relative;
+  max-width: var(--content-max);
+  margin: 0 auto;
 }
 
 header::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 4rem;
-  right: 4rem;
+  left: var(--content-padding);
+  right: var(--content-padding);
   height: 1px;
   background: linear-gradient(90deg, var(--gold), transparent);
 }
@@ -107,11 +111,13 @@ header::after {
 
 /* NAV */
 nav {
-  padding: 0 4rem;
+  padding: 0 var(--content-padding);
   border-bottom: 1px solid var(--border);
   display: flex;
   gap: 0;
   overflow-x: auto;
+  max-width: var(--content-max);
+  margin: 0 auto;
 }
 
 nav a {
@@ -136,25 +142,26 @@ nav a:hover {
 
 /* HERO BAND */
 .hero-band {
-  background: var(--dark);
-  padding: 5rem 4rem;
+  background: var(--dark) url('assets/mountain-view-commons-exterior.avif') center bottom / cover no-repeat;
+  padding: 5rem 0;
   position: relative;
   overflow: hidden;
 }
 
 .hero-band::before {
-  content: 'MVC';
+  content: '';
   position: absolute;
-  right: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14rem;
-  font-weight: 300;
-  color: rgba(184, 146, 42, 0.06);
-  line-height: 1;
+  inset: 0;
+  background: rgba(26, 24, 18, 0.85);
   pointer-events: none;
-  letter-spacing: -0.05em;
+}
+
+.hero-band-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+  position: relative;
+  z-index: 1;
 }
 
 .hero-band .tagline {
@@ -207,6 +214,9 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-bottom: 1px solid var(--border);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
 }
 
 .stat {
@@ -245,9 +255,9 @@ nav a:hover {
 
 /* MAIN CONTENT */
 main {
-  max-width: 1200px;
+  max-width: var(--content-max);
   margin: 0 auto;
-  padding: 0 4rem;
+  padding: 0 var(--content-padding);
 }
 
 /* SECTION */
@@ -612,6 +622,10 @@ main {
   overflow: hidden;
 }
 
+.callout-kpi {
+  margin-top: 2rem;
+}
+
 .callout::before {
   content: '★';
   position: absolute;
@@ -869,18 +883,20 @@ footer .footer-right {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  header { padding: 2rem; flex-direction: column; }
+  :root { --content-padding: 2rem; }
+  header { padding: 2rem var(--content-padding); flex-direction: column; }
   header .header-right { text-align: left; }
-  nav { padding: 0 2rem; }
-  main { padding: 0 2rem; }
+  nav { padding: 0 var(--content-padding); }
+  main { padding: 0 var(--content-padding); }
   .section-header { grid-template-columns: 1fr; gap: 1rem; }
   .section-label .num { display: none; }
   .items, .personas, .phases, .budget-table, .callout, .next-steps, .kpi-grid, .terms-note, .tier-label, .advisory-note {
     margin-left: 0;
   }
   .items, .personas, .next-steps, .kpi-grid { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .hero-band { padding: 3rem 2rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); padding: 0 var(--content-padding); }
+  .hero-band { padding: 3rem 0; }
+  .hero-band-inner { padding: 0 var(--content-padding); }
   footer { flex-direction: column; align-items: flex-start; padding: 2rem; }
   .budget-row { grid-template-columns: 1fr 1fr; }
   .budget-cell:nth-child(2) { display: none; }
